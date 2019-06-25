@@ -1,4 +1,4 @@
 # project1-backend
 The frontend part of the project 1. Using Spring and Hibernate.
-Yipi
+Yipeng Zhao
 Nicholaus Marsden
