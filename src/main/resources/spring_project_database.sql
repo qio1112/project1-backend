@@ -1,6 +1,16 @@
 Table: 
 projects, resource, data
 
+create Database website;
+
+create table users(
+user_id int not null auto_increment,
+username varchar(50),
+passwordhash varchar(50),
+name varchar(50),
+member_date date,
+primary key(user_id)
+);
 
 create table project(
 project_id int not null auto_increment,
@@ -10,7 +20,7 @@ Primary key(project_id)
 
 create table resource(
 project_id int,
-resource_code int not null,
+resource_code varchar(6) not null,
 resource_name varchar(100),
 primary key(resource_code),
 constraint fk_project_res foreign key (project_id)
@@ -20,7 +30,7 @@ references project(project_id)
 create table data(
 	data_id timestamp default current_timestamp,
 	project_id int,
-	resource_code int,
+	resource_code varchar(6),
 	column_name varchar(50),
 	value varchar(50),
 	type varchar(50),
@@ -36,7 +46,7 @@ create table data(
 create table formula_page_data(
 	fpage_id int not null auto_increment,
 	project_id int,
-	resource_code int,
+	resource_code varchar(6),
 	column_name varchar(50) not null,
 	from_resource BOOLEAN,
 	value varchar(50),

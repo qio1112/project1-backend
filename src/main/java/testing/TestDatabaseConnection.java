@@ -12,14 +12,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import org.hibernate.Session;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
-import  com.dao.UserDAO;
-
 
 /**
  * testing the connection to database
@@ -28,14 +24,6 @@ import  com.dao.UserDAO;
  * @author yipeng
  */
 
-/**
- * 
- * @author Nicholas Marsden
- * After everyone was able to connect using jdbc connection.
- * Made the hibernate connection which is use to add the user 
- * to the database. In the users Table if it is there or not.
- *
- */
 @WebServlet("/testdb")
 public class TestDatabaseConnection extends HttpServlet {
 
@@ -46,14 +34,33 @@ public class TestDatabaseConnection extends HttpServlet {
 	
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		HttpSession session = req.getSession(true);
-        try {
-            UserDAO userDAO = new UserDAO();
-            userDAO.addUser("nick", "pass");
-            res.sendRedirect("Success");
-        } catch (Exception e) {
- 
-            e.printStackTrace();
-        }
+		
+		Resource resource = new ClassPathResource("/mysql.properties");
+		Properties props = PropertiesLoaderUtils.loadProperties(resource);
+		String username = props.getProperty("jdbc.username");
+		String password = props.getProperty("jdbc.password");
+		String url = props.getProperty("jdbc.url");
+		String driverName = props.getProperty("jdbc.driver");
+		
+		logger.info("username: " + username + "\npassword: " + password + "\nurl: " + url + "\ndriver: " + driverName);
+		
+		Connection conn = null;
+
+		try {
+			PrintWriter out = res.getWriter();
+			out.println("Connecting to mysql database.");
+			Class.forName(driverName);
+			conn = DriverManager.getConnection(url, username, password);
+			out.println("Success!");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

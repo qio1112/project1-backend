@@ -15,6 +15,13 @@
   </properties>
   
   <dependencies>
+
+<dependency>
+    <groupId>org.mindrot</groupId>
+    <artifactId>jbcrypt</artifactId>
+    <version>0.3m</version>
+</dependency>
+
   	<dependency>
 	  <groupId>org.springframework</groupId>
 	  <artifactId>spring-webmvc</artifactId>
@@ -44,17 +51,32 @@
 	   <artifactId>hibernate-core</artifactId>
 	   <version>5.4.3.Final</version>
 	</dependency>
+	
 	<dependency>
-    	<groupId>org.hibernate</groupId>
-    	<artifactId>hibernate-entitymanager</artifactId>
-    	<version>5.4.1.Final</version>
-    </dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-orm</artifactId>
+	    <version>5.1.5.RELEASE</version>
+	</dependency>
 	
 	<dependency>
 	   <groupId>mysql</groupId>
 	   <artifactId>mysql-connector-java</artifactId>
 	   <version>8.0.16</version>
 	</dependency>
+	
+	<dependency>
+	    <groupId>com.mchange</groupId>
+	    <artifactId>c3p0</artifactId>
+	    <version>0.9.5.2</version>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+	<dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-core</artifactId>
+	    <version>2.9.9</version>
+	</dependency>
+	
 
     <dependency>
       <groupId>junit</groupId>
@@ -62,6 +84,7 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    
   </dependencies>
   
   <build>

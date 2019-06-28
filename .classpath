@@ -29,6 +29,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Nicholas Marsden/Downloads/hibernate-core-4.2.4.final.jar/hibernate-core-4.2.4.final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Nicholas Marsden/Downloads/jjwt-0.7.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
