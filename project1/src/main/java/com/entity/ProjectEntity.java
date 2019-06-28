@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="project")
-public class Project {
+public class ProjectEntity {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -21,11 +21,11 @@ public class Project {
 	@Column(name="project_name")
 	private String projectName;
 	
-	public Project() {
+	public ProjectEntity() {
 		System.out.println("Entity project created.");
 	}
 	
-	public Project(File csvFile) {
+	public ProjectEntity(File csvFile) {
 		
 	}
 
