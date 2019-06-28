@@ -27,7 +27,7 @@ import javax.persistence.Table;
 @Table(name="users")
 public class User {
 	@Id
-//	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 //	@Basic(optional = false)
 //    @Column(name = "id") 
 	long id;
@@ -35,6 +35,7 @@ public class User {
 	String userName;
 //	@Column(name = "password") 
 	String password;
+
 	public long getId() {
 		return id;
 	}
