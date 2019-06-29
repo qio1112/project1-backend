@@ -9,6 +9,7 @@ import java.util.ArrayList;
  */
 public class Project {
 	int project_id;
+	String record_code;
 	String ProjectNames;
 	public int getProject_id() {
 		return project_id;
