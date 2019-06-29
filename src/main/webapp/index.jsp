@@ -2,9 +2,9 @@
 <body>
 <h2>Hello World!</h2>
 
-<form action="/add" method="get"> 
-<input value="name" />
-<input value="password" />
+<form action="project1/test" method="get"> 
+<input value="name"  name="name"/>
+<input value="password" name="pwd" />
 <input type="submit">
 </form>
 
