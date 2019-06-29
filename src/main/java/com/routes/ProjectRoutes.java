@@ -1,47 +1,52 @@
 package com.routes;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
+@RequestMapping(value="/project")
 public class ProjectRoutes {
 	
-	
-	@RequestMapping("/project/test")
-	public void testProject() {
-		System.out.println("project user");
+	@ResponseBody
+	@RequestMapping(value="/test", method= RequestMethod.GET)
+	public String testProject() {
+		return "project test successfull";
 
 	}
 
 	//get all project (resource) names
-	@RequestMapping("/project")
+	@RequestMapping(value="/",method= RequestMethod.GET)
 	public void getProjectName() {
 		System.out.println("get project names");
 
 	}
-	//get all data of a project(resource) by project name
-	@RequestMapping("project/{project_name}?page=10&page_rows=20")
-	public void getProjectSubRow() {
-		System.out.println("get project sub row");
-
-	}
+	
 	// updates one cell in the table 
-	@RequestMapping("/project/edit_cell")
+	@RequestMapping(value="/edit_cell",method= RequestMethod.PATCH)
 	public void updateProjectCell() {
 		System.out.println("update project cell");
 
 	}
 	
-	@RequestMapping("/project/add_row")
+	@RequestMapping(value="/add_row",method= RequestMethod.PUT)
 	public void addRowToProject() {
 		System.out.println("add row");
 
 	}
-	@RequestMapping("/project/add_column")
+	@RequestMapping(value="/add_column", method= RequestMethod.PUT)
 	public void addColumnToProject() {
 		System.out.println("add column");
 	}
-	@RequestMapping("/project/delete_column/{project_id}/{column_name}")
+	//get all data of a project(resource) by project name
+	//?page=10&page_rows=20
+	@RequestMapping(value="/{project_name}", method= RequestMethod.GET)
+	public void getProjectSubRow() {
+		System.out.println("get project sub row");
+
+	}
+	@RequestMapping(value="/delete_column/{project_id}/{column_name}",method= RequestMethod.DELETE)
 	public void deleteColumnToProject() {
 		System.out.println("delete column");
 	}
