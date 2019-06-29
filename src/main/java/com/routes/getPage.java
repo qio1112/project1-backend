@@ -7,10 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class getPage {
 
-	@RequestMapping("/")
+	@RequestMapping("/add")
 	public String helloWorld() {
 		System.out.println("love you long time");
-//		return "index.jsp";
 		return "nomouh";
 	}
 	
@@ -24,12 +23,8 @@ public class getPage {
 //        return student;
 //    }
 	
-  @GetMapping(value = "/student/")
+  @GetMapping(value = "/student")
   public  void getTestData() {
-//      Student student = new Student();
-//      student.setName("Peter");
-//      student.setId(studentId);
 	  	System.out.println("Jamin with you to get my girl");
-//      return student;
   }
 }

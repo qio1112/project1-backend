@@ -17,15 +17,16 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 @Configuration
-@ComponentScan(basePackages = "com.*")
-@EnableWebMvc
+@ComponentScan(basePackages = "com.routes")
+@EnableWebMvc //annotation everywhere
 @EnableTransactionManagement
 @PropertySource("classpath:/mysql.properties")
-public class AppConfig {
+public class AppConfig implements WebMvcConfigurer{
 	
 	@Autowired
 	private Environment env; 
