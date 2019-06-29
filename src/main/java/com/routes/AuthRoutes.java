@@ -13,7 +13,10 @@ import com.entity.User;
  * 
  * @author Nicholas Marsden
  *
- *
+ * registerRoute-user would be use to create and log a user in with a token 
+ * signinRoute - user would be apple sign is and only if exist
+ * ----registerRoute and signinRoute both generate a new token signing a user in--
+ * logout - removes the token
  *
  */
 
