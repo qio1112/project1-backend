@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
@@ -25,6 +26,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @EnableWebMvc
 @EnableTransactionManagement
 @PropertySource("classpath:/mysql.properties")
+@Import({SpringSecurityConfig.class})
 public class AppConfig {
 	
 	@Autowired
@@ -32,7 +34,7 @@ public class AppConfig {
 	
 	private Logger logger = Logger.getLogger(this.getClass().getName());
 	
-	@Bean
+	@Bean(name="dataSource")
 	public DataSource myDataSource() {
 		
 		// create connection pool
