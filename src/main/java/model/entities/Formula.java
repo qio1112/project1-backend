@@ -19,11 +19,11 @@ public class Formula {
 	//checks to see if column is from resource or not
 	ArrayList<Boolean>  from_resource;
 	
-	
-	/*
-	 * Methods to get Each column from the user
-	 * OR
-	 * store each column from the database
-	 * 
-	 * */
 }
+
+/*
+ * Methods to get Each column from the user
+ * OR
+ * store each column from the database
+ * 
+ * */
