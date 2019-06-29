@@ -19,6 +19,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * signinRoute - user would be apple sign is and only if exist
  * ----registerRoute and signinRoute both generate a new token signing a user in--
  * logout - removes the token
+ * 
+ * dependencies (for the json to class instance)
+ *jackson-dataformat-xml
+ *jackson-mapper-asl
+ *jackson-databind
+ *
  *
  */
 
@@ -65,4 +71,3 @@ public class AuthRoutes {
 		System.out.println("logout user");
 	}
 }
-

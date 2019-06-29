@@ -1,9 +1,15 @@
 package com.routes;
 
+import java.util.ArrayList;
+
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import model.entities.Project;
+
 
 @RestController
 @RequestMapping(value="/project")
@@ -18,8 +24,12 @@ public class ProjectRoutes {
 
 	//get all project (resource) names
 	@RequestMapping(value="/",method= RequestMethod.GET)
-	public void getProjectName() {
+	public ArrayList<Project> getProjectName() {		
 		System.out.println("get project names");
+		
+		// return an array of projects
+		ArrayList<Project> projects= new ArrayList<Project>();
+		return projects;
 
 	}
 	
