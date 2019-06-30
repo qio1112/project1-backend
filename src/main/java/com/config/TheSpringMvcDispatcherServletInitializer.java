@@ -8,12 +8,12 @@ public class TheSpringMvcDispatcherServletInitializer extends AbstractAnnotation
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class[] {AppConfig.class};
+		return null; //new Class[] {AppConfig.class};
 	}
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		return new Class[] {getPage.class};
+		return new Class[] {AppConfig.class};//  getPage.class
 	}
 
 	@Override
