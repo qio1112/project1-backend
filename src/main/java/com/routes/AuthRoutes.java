@@ -1,5 +1,7 @@
 package com.routes;
 
+import javax.servlet.http.HttpServlet;
+
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dao.UserDaoImpl;
 import com.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -55,14 +58,16 @@ public class AuthRoutes {
 	*/
 	@RequestMapping(value="/register", method= RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void registerRoute(@RequestBody User user) { // signup
-		System.out.println(user.getUserName());
-		System.out.println(user.getPassword());
+		String username = user.getUserName();
+		String password = user.getPassword();
+		(new UserDaoImpl()).setUserByUsername(username, password);
 		System.out.println("register user");
 	}
 	
 	@RequestMapping(value="/signin",  method= RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void signinRoute(@RequestBody User user) {
-		System.out.println(user.getUserName());
+		String username = user.getUserName();
+		(new UserDaoImpl()).getUserByUsername(username);
 		System.out.println("signin user");
 	}
 	// remove the token so no one else can use it.
