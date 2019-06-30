@@ -4,16 +4,18 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 import com.routes.getPage;
 
+import model.entities.User;
+
 public class TheSpringMvcDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
-	protected Class<?>[] getRootConfigClasses() {
-		return null; //new Class[] {AppConfig.class};
+	protected Class<?>[] getRootConfigClasses() { // first thing to upload
+		return new Class[] {AppConfig.class};
 	}
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		return new Class[] {AppConfig.class};//  getPage.class
+		return new Class[] {User.class};//  getPage.class
 	}
 
 	@Override

@@ -26,18 +26,18 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 @Configuration
-@ComponentScan(basePackages = "com.routes")
+@ComponentScan(basePackages = "com.routes, model.entities")
 @EnableWebMvc //annotation everywhere
 @EnableTransactionManagement
 @PropertySource("classpath:/mysql.properties")
 public class AppConfig implements WebMvcConfigurer{
-	@Bean
-	public InternalResourceViewResolver viewResolver() {
-		InternalResourceViewResolver vr = new  InternalResourceViewResolver();
-		vr.setPrefix("/WEB-INF/");
-		vr.setSuffix(".jsp");
-		return vr;
-	}
+//	@Bean
+//	public InternalResourceViewResolver viewResolver() {
+//		InternalResourceViewResolver vr = new  InternalResourceViewResolver();
+//		vr.setPrefix("/WEB-INF/");
+//		vr.setSuffix(".jsp");
+//		return vr;
+//	}
 	
 	@Autowired
 	private Environment env; 

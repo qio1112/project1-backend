@@ -2,6 +2,7 @@ package com.routes;
 
 import javax.servlet.http.HttpServlet;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dao.UserDaoImpl;
-import com.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import model.entities.User;
 
 
 /**
@@ -46,6 +47,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 //@Consumes(MediaType.APPLICATION_JSON)
 public class AuthRoutes {
 	ObjectMapper mapper = new ObjectMapper();
+	
+    private User jdbcUserDAO;
+
+    public User getJdbcUserDAO() {
+        return jdbcUserDAO;
+    }
+
+    @Autowired
+    public void setJdbcUserDAO(User jdbcUserDAO) {
+        this.jdbcUserDAO = jdbcUserDAO;
+    }
 	@ResponseBody 
 	@RequestMapping(value="/test", method= RequestMethod.GET)
 	public String testAuth() {
@@ -58,16 +70,17 @@ public class AuthRoutes {
 	*/
 	@RequestMapping(value="/register", method= RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void registerRoute(@RequestBody User user) { // signup
-		String username = user.getUserName();
-		String password = user.getPassword();
-		(new UserDaoImpl()).setUserByUsername(username, password);
+//		String username = user.getUserName();
+//		String password = user.getPassword();
+		(new User()).getUserByUsername(user.getUserName());
 		System.out.println("register user");
 	}
 	
 	@RequestMapping(value="/signin",  method= RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void signinRoute(@RequestBody User user) {
-		String username = user.getUserName();
-		(new UserDaoImpl()).getUserByUsername(username);
+//		String username = user.getUserName();
+//		(new UserDaoImpl()).getUserByUsername(username);
+		(new User()).createUser(user);
 		System.out.println("signin user");
 	}
 	// remove the token so no one else can use it.
