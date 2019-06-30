@@ -36,4 +36,13 @@ public class UserDaoImpl implements UserDao {
 		return null;
 	}
 
+	@Override
+	public void createUser(UserEntity newUser) {
+		
+		sessionFactory.getCurrentSession()
+			.saveOrUpdate(newUser);
+	}
+	
+	
+
 }

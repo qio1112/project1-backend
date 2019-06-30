@@ -12,9 +12,6 @@ import javax.persistence.Table;
 public class UserEntity {
 	
 	@Id
-	@Column(name="id")
-	private int id;
-	
 	@Column(name="username")
 	private String username;
 	
@@ -29,21 +26,11 @@ public class UserEntity {
 	
 	public UserEntity() { }
 
-	public UserEntity(int id, String username, String password, String name, Date memberDate) {
-		super();
-		this.id = id;
+	public UserEntity(String username, String password, String name, Date memberDate) {
 		this.username = username;
 		this.password = password;
 		this.name = name;
 		this.memberDate = memberDate;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getUsername() {
@@ -77,6 +64,11 @@ public class UserEntity {
 	public void setMemberDate(Date memberDate) {
 		this.memberDate = memberDate;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "UserEntity [username=" + username + ", password=" + password + ", name=" + name + ", memberDate="
+				+ memberDate + "]";
+	}
 	
 }

@@ -10,8 +10,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="formulas")
-public class Formulas implements Serializable {
+@Table(name="formula")
+public class FormulaEntity implements Serializable {
 	
 	/**
 	 * 
@@ -30,9 +30,9 @@ public class Formulas implements Serializable {
 	@Column(name="formula")
 	private String formula;
 
-	public Formulas() { }
+	public FormulaEntity() { }
 
-	public Formulas(ProjectEntity project, String formulaName, String formula) {
+	public FormulaEntity(ProjectEntity project, String formulaName, String formula) {
 		super();
 		this.project = project;
 		this.formulaName = formulaName;

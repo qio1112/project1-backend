@@ -9,4 +9,6 @@ import com.entity.UserEntity;
 public interface UserDao {
 	
 	UserEntity getUserByUsername(String username);
+	
+	void createUser(UserEntity newUser);
 }

@@ -37,20 +37,20 @@ public class FormulaPageDataEntity implements Serializable{
 	@Column(name="type")
 	private String type;
 	
-	@Column(name="from")
-	private String from;
+	@Column(name="from_resource")
+	private int fromResource;
 	
 	public FormulaPageDataEntity() { }
 
 	public FormulaPageDataEntity(ProjectEntity project, String resourceCode, String columnName, String value,
-			String type, String from) {
+			String type, int fromResource) {
 		super();
 		this.project = project;
 		this.resourceCode = resourceCode;
 		this.columnName = columnName;
 		this.value = value;
 		this.type = type;
-		this.from = from;
+		this.fromResource = fromResource;
 	}
 
 	public ProjectEntity getProject() {
@@ -93,12 +93,12 @@ public class FormulaPageDataEntity implements Serializable{
 		this.type = type;
 	}
 
-	public String getFrom() {
-		return from;
+	public int getFromResource() {
+		return fromResource;
 	}
 
-	public void setFrom(String from) {
-		this.from = from;
+	public void setFrom(int fromResource) {
+		this.fromResource = fromResource;
 	}
 
 	

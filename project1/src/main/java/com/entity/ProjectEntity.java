@@ -1,6 +1,5 @@
 package com.entity;
 
-import java.io.File;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,8 +14,8 @@ public class ProjectEntity {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="project_id")
-	private int project_id;
+	@Column(name="id")
+	private int id;
 	
 	@Column(name="project_name")
 	private String projectName;
@@ -25,16 +24,16 @@ public class ProjectEntity {
 		System.out.println("Entity project created.");
 	}
 	
-	public ProjectEntity(File csvFile) {
-		
+	public ProjectEntity(String name) {
+		this.projectName = name;
 	}
 
-	public int getProject_id() {
-		return project_id;
+	public int getId() {
+		return id;
 	}
 
-	public void setProject_id(int project_id) {
-		this.project_id = project_id;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getProjectName() {
@@ -47,7 +46,7 @@ public class ProjectEntity {
 
 	@Override
 	public String toString() {
-		return "Project [project_id=" + project_id + ", projectName=" + projectName + "]";
+		return "Project [id=" + id + ", projectName=" + projectName + "]";
 	}
 	
 }
