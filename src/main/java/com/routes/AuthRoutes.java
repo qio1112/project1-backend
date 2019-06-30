@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.database.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import model.entities.User;
+import model.entities.UserDaoImpl;
+
 
 
 /**
@@ -46,18 +48,7 @@ import model.entities.User;
 @RequestMapping(value="/auth")
 //@Consumes(MediaType.APPLICATION_JSON)
 public class AuthRoutes {
-	ObjectMapper mapper = new ObjectMapper();
 	
-    private User jdbcUserDAO;
-
-    public User getJdbcUserDAO() {
-        return jdbcUserDAO;
-    }
-
-    @Autowired
-    public void setJdbcUserDAO(User jdbcUserDAO) {
-        this.jdbcUserDAO = jdbcUserDAO;
-    }
 	@ResponseBody 
 	@RequestMapping(value="/test", method= RequestMethod.GET)
 	public String testAuth() {
@@ -72,7 +63,7 @@ public class AuthRoutes {
 	public void registerRoute(@RequestBody User user) { // signup
 //		String username = user.getUserName();
 //		String password = user.getPassword();
-		(new User()).getUserByUsername(user.getUserName());
+		(new UserDaoImpl()).createUser(user);;
 		System.out.println("register user");
 	}
 	
@@ -80,7 +71,7 @@ public class AuthRoutes {
 	public void signinRoute(@RequestBody User user) {
 //		String username = user.getUserName();
 //		(new UserDaoImpl()).getUserByUsername(username);
-		(new User()).createUser(user);
+		(new UserDaoImpl()).getUserByUsername(user.getName());
 		System.out.println("signin user");
 	}
 	// remove the token so no one else can use it.

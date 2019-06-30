@@ -1,6 +1,6 @@
 package com.dao;
 
-import model.entities.User;
+import com.database.entity.User;
 
 /**
  * User DAO interface

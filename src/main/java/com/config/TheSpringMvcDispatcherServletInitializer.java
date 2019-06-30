@@ -2,9 +2,9 @@ package com.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import com.database.entity.User;
 import com.routes.getPage;
 
-import model.entities.User;
 
 public class TheSpringMvcDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
