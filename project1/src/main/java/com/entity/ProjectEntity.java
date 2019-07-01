@@ -1,6 +1,5 @@
 package com.entity;
 
-import java.io.File;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,32 +8,37 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Hibernate entity mapping to table "project"
+ * @author yipeng
+ *
+ */
 @Entity
 @Table(name="project")
-public class Project {
+public class ProjectEntity {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="project_id")
-	private int project_id;
+	@Column(name="id")
+	private int id;
 	
 	@Column(name="project_name")
 	private String projectName;
 	
-	public Project() {
+	public ProjectEntity() {
 		System.out.println("Entity project created.");
 	}
 	
-	public Project(File csvFile) {
-		
+	public ProjectEntity(String name) {
+		this.projectName = name;
 	}
 
-	public int getProject_id() {
-		return project_id;
+	public int getId() {
+		return id;
 	}
 
-	public void setProject_id(int project_id) {
-		this.project_id = project_id;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getProjectName() {
@@ -47,7 +51,7 @@ public class Project {
 
 	@Override
 	public String toString() {
-		return "Project [project_id=" + project_id + ", projectName=" + projectName + "]";
+		return "Project [id=" + id + ", projectName=" + projectName + "]";
 	}
 	
 }
