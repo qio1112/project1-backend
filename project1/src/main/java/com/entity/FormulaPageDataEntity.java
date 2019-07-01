@@ -9,6 +9,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+/**
+ * Hibernate entity mapping to table "formula_page_data"
+ * @author yipeng
+ *
+ */
 @Entity
 @Table(name="formula_page_data")
 public class FormulaPageDataEntity implements Serializable{

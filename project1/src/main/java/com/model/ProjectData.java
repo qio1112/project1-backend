@@ -4,6 +4,12 @@ import com.entity.DataEntity;
 import com.entity.ProjectEntity;
 import com.entity.ResourceEntity;
 
+/**
+ * json mapping class to receiving and sending json through jackson
+ * maps to data of resource(project) page
+ * @author yipeng
+ *
+ */
 public class ProjectData {
 
 	private ProjectEntity project;

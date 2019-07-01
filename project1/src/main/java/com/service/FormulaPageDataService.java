@@ -4,6 +4,11 @@ import com.entity.FormulaPageDataEntity;
 import com.entity.ProjectEntity;
 import com.model.FormulaPageData;
 
+/**
+ * service for formula page data
+ * @author yipeng
+ *
+ */
 public interface FormulaPageDataService {
 	
 	FormulaPageData getFormulaPageDataByProject(ProjectEntity project);

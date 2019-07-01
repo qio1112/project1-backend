@@ -12,6 +12,11 @@ import org.springframework.stereotype.Repository;
 import com.entity.FormulaEntity;
 import com.entity.ProjectEntity;
 
+/**
+ * DAO of formulas in formula pages
+ * @author yipeng
+ *
+ */
 @Repository
 public class FormulaDaoImpl implements FormulaDao {
 

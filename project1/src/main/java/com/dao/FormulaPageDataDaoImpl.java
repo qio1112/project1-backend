@@ -11,6 +11,11 @@ import org.springframework.stereotype.Repository;
 import com.entity.FormulaPageDataEntity;
 import com.entity.ProjectEntity;
 
+/**
+ * DAO of non-formula data in formula page
+ * @author yipeng
+ *
+ */
 @Repository
 public class FormulaPageDataDaoImpl implements FormulaPageDataDao {
 	

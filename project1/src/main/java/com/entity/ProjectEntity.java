@@ -8,6 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Hibernate entity mapping to table "project"
+ * @author yipeng
+ *
+ */
 @Entity
 @Table(name="project")
 public class ProjectEntity {

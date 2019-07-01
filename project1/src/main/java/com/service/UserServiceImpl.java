@@ -7,6 +7,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dao.UserDao;
 import com.entity.UserEntity;
 
+/**
+ * service for user information
+ * @author yipeng
+ *
+ */
 @Service
 @Transactional
 public class UserServiceImpl implements UserService{

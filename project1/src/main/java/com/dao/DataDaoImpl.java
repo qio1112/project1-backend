@@ -11,6 +11,11 @@ import org.springframework.stereotype.Repository;
 import com.entity.DataEntity;
 import com.entity.ProjectEntity;
 
+/**
+ * Project (resource) DAO
+ * @author yipeng
+ *
+ */
 @Repository
 public class DataDaoImpl implements DataDao {
 

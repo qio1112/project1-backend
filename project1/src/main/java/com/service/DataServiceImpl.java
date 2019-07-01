@@ -14,6 +14,11 @@ import com.entity.ProjectEntity;
 import com.entity.ResourceEntity;
 import com.model.ProjectData;
 
+/**
+ * service of project(resource) page data
+ * @author yipeng
+ *
+ */
 @Service
 @Transactional
 public class DataServiceImpl implements DataService{

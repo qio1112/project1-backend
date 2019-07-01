@@ -13,6 +13,11 @@ import com.entity.FormulaPageDataEntity;
 import com.entity.ProjectEntity;
 import com.model.FormulaPageData;
 
+/**
+ * service for formula page data
+ * @author yipeng
+ *
+ */
 @Service
 @Transactional
 public class FormulaPageDataServiceImpl implements FormulaPageDataService{

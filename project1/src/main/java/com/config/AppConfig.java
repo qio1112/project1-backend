@@ -21,6 +21,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
+/**
+ * Configuration class of spring and hibernate
+ * @author yipeng
+ *
+ */
 @Configuration
 @ComponentScan(basePackages = "com.*")
 @EnableWebMvc

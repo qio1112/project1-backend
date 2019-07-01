@@ -5,6 +5,11 @@ import java.util.List;
 import com.entity.ProjectEntity;
 import com.entity.ResourceEntity;
 
+/**
+ * DAO of resource information of projects
+ * @author yipeng
+ *
+ */
 public interface ResourceDao {
 	
 	// select

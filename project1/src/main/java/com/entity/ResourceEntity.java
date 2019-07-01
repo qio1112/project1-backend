@@ -9,6 +9,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+/**
+ * Hibernate entity mapping to table "resource"
+ * @author yipeng
+ *
+ */
 @Entity
 @Table(name="resource")
 public class ResourceEntity implements Serializable {

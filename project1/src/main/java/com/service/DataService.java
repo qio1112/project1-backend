@@ -6,6 +6,11 @@ import com.entity.DataEntity;
 import com.entity.ProjectEntity;
 import com.model.ProjectData;
 
+/**
+ * service of project(resource) page data
+ * @author yipeng
+ *
+ */
 public interface DataService {
 	
 	List<ProjectEntity> getProjects();

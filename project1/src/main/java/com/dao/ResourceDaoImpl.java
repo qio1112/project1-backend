@@ -11,6 +11,11 @@ import org.springframework.stereotype.Repository;
 import com.entity.ProjectEntity;
 import com.entity.ResourceEntity;
 
+/**
+ * DAO of resource information of projects
+ * @author yipeng
+ *
+ */
 @Repository
 public class ResourceDaoImpl implements ResourceDao {
 	

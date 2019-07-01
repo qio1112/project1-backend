@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.dao.UserDao;
 import com.entity.UserEntity;
 
+
 @Service("userDetailsService")
 public class TheUserDetailsService implements UserDetailsService{
 	

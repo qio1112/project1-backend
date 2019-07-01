@@ -5,6 +5,11 @@ import java.util.List;
 import com.entity.FormulaEntity;
 import com.entity.ProjectEntity;
 
+/**
+ * DAO of formulas in formula pages
+ * @author yipeng
+ *
+ */
 public interface FormulaDao {
 	
 	// select

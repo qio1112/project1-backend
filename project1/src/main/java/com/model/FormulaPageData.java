@@ -4,6 +4,12 @@ import com.entity.FormulaEntity;
 import com.entity.FormulaPageDataEntity;
 import com.entity.ProjectEntity;
 
+/**
+ * json mapping class to receiving and sending json through jackson
+ * maps to data of formula page, including non-formula data and formulas
+ * @author yipeng
+ *
+ */
 public class FormulaPageData {
 	
 	private ProjectEntity project;

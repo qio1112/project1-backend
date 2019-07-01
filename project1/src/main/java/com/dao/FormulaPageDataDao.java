@@ -5,6 +5,11 @@ import java.util.List;
 import com.entity.FormulaPageDataEntity;
 import com.entity.ProjectEntity;
 
+/**
+ * DAO of non-formula data in formula page
+ * @author yipeng
+ *
+ */
 public interface FormulaPageDataDao {
 	
 	// selection

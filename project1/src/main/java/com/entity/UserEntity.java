@@ -7,6 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Hibernate entity mapping to table "user"
+ * @author yipeng
+ *
+ */
 @Entity
 @Table(name="user")
 public class UserEntity {
