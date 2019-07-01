@@ -19,13 +19,15 @@ public interface FormulaPageDataDao {
 	// insertion
 	void insertFormulaPageData(ProjectEntity project, String resourceCode, String columnName, String value, String type, int fromResource);
 	
+	void insertFormulaPageData(FormulaPageDataEntity newFormulaPageData);
+	
 	// update
 	void updateFormulaPageData(FormulaPageDataEntity updatedData);
 	
 	// deletion
 	int deleteFormulaPageData(ProjectEntity project, String resourceCode, String column_name);
 	
-	int deleteFormulaPageDataByProjectIdResourceId(ProjectEntity project, String resourceCode);
+	int deleteFormulaPageDataByProjectResourceId(ProjectEntity project, String resourceCode);
 	
-	int deleteFormulaPageData();
+	int deleteFormulaPageDataByProject(ProjectEntity project);
 }

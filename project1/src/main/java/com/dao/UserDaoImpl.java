@@ -17,7 +17,7 @@ import com.entity.UserEntity;
 public class UserDaoImpl implements UserDao {
 	
 	@Autowired
-	SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 	
 	@Override
 	@SuppressWarnings("unchecked")
@@ -26,7 +26,7 @@ public class UserDaoImpl implements UserDao {
 		List<UserEntity> users = new ArrayList<>();
 		
 		users = sessionFactory.getCurrentSession()
-				.createQuery("from user where username=?")
+				.createQuery("from UserEntity where username=?")
 				.setParameter(0, username)
 				.getResultList();
 		

@@ -15,4 +15,6 @@ public interface ProjectDao {
 	
 	//insert
 	void insertProject(String name);
+	
+	void insertProject(ProjectEntity newProject);
 }

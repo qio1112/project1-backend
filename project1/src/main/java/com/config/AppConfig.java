@@ -80,7 +80,7 @@ public class AppConfig {
 	@Bean
 	public LocalSessionFactoryBean sessionFactory(){
 		
-		// create session factorys
+		// create session factors
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		
 		// set the properties
@@ -88,6 +88,7 @@ public class AppConfig {
 		sessionFactory.setPackagesToScan(env.getProperty("hibernate.packagesToScan"));
 		sessionFactory.setHibernateProperties(getHibernateProperties());
 		
+		System.out.println(sessionFactory);
 		return sessionFactory;
 	}
 	

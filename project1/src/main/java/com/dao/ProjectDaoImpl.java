@@ -20,7 +20,7 @@ public class ProjectDaoImpl implements ProjectDao {
 	public List<ProjectEntity> getProjects() {
 		
 		Session session = sessionFactory.getCurrentSession();
-		Query<ProjectEntity> query = session.createQuery("select * from project order by id", ProjectEntity.class);
+		Query<ProjectEntity> query = session.createQuery("from ProjectEntity order by id", ProjectEntity.class);
 		return query.getResultList();
 	}
 
@@ -28,7 +28,7 @@ public class ProjectDaoImpl implements ProjectDao {
 	public ProjectEntity getProjectById(int id) {
 		
 		Session session = sessionFactory.getCurrentSession();
-		Query<ProjectEntity> query = session.createQuery("select * from project where id=? order by id", ProjectEntity.class);
+		Query<ProjectEntity> query = session.createQuery("from ProjectEntity where id=? order by id", ProjectEntity.class);
 		query.setParameter(0, id);
 		return query.getSingleResult();
 	}
@@ -37,7 +37,7 @@ public class ProjectDaoImpl implements ProjectDao {
 	public ProjectEntity getProjectByName(String name) {
 		
 		Session session = sessionFactory.getCurrentSession();
-		Query<ProjectEntity> query = session.createQuery("select * from project where name=? order by id", ProjectEntity.class);
+		Query<ProjectEntity> query = session.createQuery("from ProjectEntity where name=? order by id", ProjectEntity.class);
 		query.setParameter(0, name);
 		return query.getSingleResult();
 	}
@@ -48,6 +48,13 @@ public class ProjectDaoImpl implements ProjectDao {
 		
 		Session session = sessionFactory.getCurrentSession();
 		ProjectEntity newProject = new ProjectEntity(name);
+		session.saveOrUpdate(newProject);
+	}
+
+	@Override
+	public void insertProject(ProjectEntity newProject) {
+		
+		Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(newProject);
 	}
 

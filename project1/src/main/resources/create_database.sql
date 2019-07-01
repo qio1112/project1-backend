@@ -13,7 +13,7 @@ drop table if exists `projects`;
 drop table if exists `users`;
 SET FOREIGN_KEY_CHECKS = 1;
 
-create table `users` (
+create table `user` (
     `username` varchar(50) primary key,
     `password` varchar(50) not null,
     `name` varchar(50) not null,
@@ -21,10 +21,10 @@ create table `users` (
 ) engine=innodb;
 
 
-create table `projects` (
+create table `project` (
 	`id` int auto_increment primary key,
-    `name` varchar(50) not null
-) engine=innodb;
+    `project_name` varchar(50) not null
+) engine=innodb auto_increment=1;
 
 create table `data` (
 	`project_id` int not null,
@@ -33,7 +33,7 @@ create table `data` (
     `value` varchar(50),
     `type` varchar(50) not null,
     primary key (`project_id`, `resource_code`, `column_name`),
-    foreign key (`project_id`) references `projects`(`id`)
+    foreign key (`project_id`) references `project`(`id`)
 ) engine=innodb;
 
 create table `resource` (
@@ -51,20 +51,20 @@ create table `formula_page_data` (
     `type` varchar(50) not null,
     `from_resource` tinyint(1) not null,
     primary key (`project_id`, `resource_code`, `column_name`),
-    foreign key (`project_id`) references `projects`(`id`)
+    foreign key (`project_id`) references `project`(`id`)
 ) engine=innodb;
 
-create table `formulas` (
+create table `formula` (
 	`project_id` int not null,
     `formula_name` varchar(50) not null,
     `formula` varchar(50),
-    foreign key (`project_id`) references `projects`(`id`),
+    foreign key (`project_id`) references `project`(`id`),
     primary key (`project_id`, `formula_name`)
 ) engine=innodb;
 
-insert into `users` values ('test', 'test', 'testname', curdate());
+insert into `user` values ('test', 'test', 'testname', curdate());
 
-insert into `projects` (id, name) values (1, 'Project One');
+insert into `project` (id, project_name) values (1, 'Project One');
 
 insert into `data` values (1, '000001', 'email', 'e1@test.com', 'text');
 insert into `data` values (1, '000001', 'facts', '1233', 'number');
@@ -78,5 +78,3 @@ insert into `formula_page_data` values (1, '000001', 'aa' , '10', 'number', 0);
 insert into `formula_page_data` values (1, '000001', 'bb' , '20', 'number', 0);
 insert into `formula_page_data` values (1, '000001', 'email' , 'e1@test.com', 'text', 1);
 insert into `formula_page_data` values (1, '000001', 'facts' , '123', 'number', 1);
-    
-    

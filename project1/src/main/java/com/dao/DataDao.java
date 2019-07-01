@@ -13,19 +13,28 @@ public interface DataDao {
 	
 	List<DataEntity> getDataByProjectResourceCode(ProjectEntity project, String resourceCode);
 	
+	//used
 	List<DataEntity> getDataByProjectAndRange(ProjectEntity project, int start, int end);
 	
 	DataEntity getDataByProjectResourceCodeColumnName(ProjectEntity project, String resourceCode, String columnName);
 	
-	// insertion
+	// insertion 
+	
+	//used
 	void insertData(ProjectEntity project, String resourceCode, String columnName, String value, String type);
 	
+	void insertData(DataEntity newDataEntity);
+	
 	// update
+	
 	void updateData(DataEntity updatedData);
 	
 	// deletion
+	
 	int deleteData(ProjectEntity project, String resourceCode, String column_name);
 	
 	int deleteDataByProjectIdResourceId(ProjectEntity project, String resourceCode);
+	
+	int deleteDataByProject(ProjectEntity project);
 	
 }

@@ -18,21 +18,21 @@ public class ResourceDaoImpl implements ResourceDao {
 	SessionFactory sessionFactory;
 
 	@Override
-	public List<ResourceEntity> getResourcesByProjectId(ProjectEntity project) {
+	public List<ResourceEntity> getResourcesByProject(ProjectEntity project) {
 		
 		int projectId = project.getId();
 		Session session = sessionFactory.getCurrentSession();
-		Query<ResourceEntity> query = session.createQuery("select * from resource where project_id=? order by resource_code", ResourceEntity.class);
+		Query<ResourceEntity> query = session.createQuery("from ResourceEntity where projectId=? order by resourceCode", ResourceEntity.class);
 		query.setParameter(0, projectId);
 		return query.getResultList();
 	}
 
 	@Override
-	public ResourceEntity getResourceByProjectIdResourceCode(ProjectEntity project, String resourceCode) {
+	public ResourceEntity getResourceByProjectResourceCode(ProjectEntity project, String resourceCode) {
 		
 		int projectId = project.getId();
 		Session session = sessionFactory.getCurrentSession();
-		Query<ResourceEntity> query = session.createQuery("select * from resource where project_id=? and resource_code=?", ResourceEntity.class);
+		Query<ResourceEntity> query = session.createQuery("from ResourceEntity where projectId=? and resourceCode=?", ResourceEntity.class);
 		query.setParameter(0, projectId);
 		query.setParameter(1, resourceCode);
 		return query.getSingleResult();
@@ -52,10 +52,17 @@ public class ResourceDaoImpl implements ResourceDao {
 
 		int projectId = project.getId();
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("delete resource where project_id=? and resource_code=?");
+		Query query = session.createQuery("delete from ResourceEntity where projectId=? and resourceCode=?");
 		query.setParameter(0, projectId);
 		query.setParameter(1, resourceCode);
 		query.executeUpdate();
+	}
+
+	@Override
+	public void insertResource(ResourceEntity newResource) {
+		
+		Session session = sessionFactory.getCurrentSession();
+		session.saveOrUpdate(newResource);
 	}
 
 }

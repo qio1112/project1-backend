@@ -1,8 +1,10 @@
 package com.service;
 
-import org.springframework.stereotype.Service;
+import com.entity.UserEntity;
 
-@Service
-public class UserService {
-
+public interface UserService {
+	
+	void signup(UserEntity newUser);
+	
+	UserEntity getUserInfo(String username);
 }

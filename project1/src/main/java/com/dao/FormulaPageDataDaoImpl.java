@@ -24,7 +24,7 @@ public class FormulaPageDataDaoImpl implements FormulaPageDataDao {
 			
 			int projectId = project.getId();
 			Session session = sessionFactory.getCurrentSession();
-			Query<FormulaPageDataEntity> query = session.createQuery("select * from FormulaPageData where project_id=? order by resource_code", FormulaPageDataEntity.class);
+			Query<FormulaPageDataEntity> query = session.createQuery("from FormulaPageDataEntity where projectId=? order by resourceCode", FormulaPageDataEntity.class);
 			query.setParameter(0, projectId);
 			return query.getResultList();
 		}
@@ -34,7 +34,7 @@ public class FormulaPageDataDaoImpl implements FormulaPageDataDao {
 			
 			int projectId = project.getId();
 			Session session = sessionFactory.getCurrentSession();
-			Query<FormulaPageDataEntity> query = session.createQuery("select * from FormulaPageData where project_id=? and resource_code=? order by column_name", FormulaPageDataEntity.class);
+			Query<FormulaPageDataEntity> query = session.createQuery("from FormulaPageDataEntity where projectId=? and resourceCode=? order by columnName", FormulaPageDataEntity.class);
 			query.setParameter(0, projectId);
 			query.setParameter(1, resourceCode);
 			return query.getResultList();
@@ -45,7 +45,7 @@ public class FormulaPageDataDaoImpl implements FormulaPageDataDao {
 			
 			int projectId = project.getId();
 			Session session = sessionFactory.getCurrentSession();
-			Query<FormulaPageDataEntity> query = session.createQuery("select * from FormulaPageData where project_id=? and resource_code=? and column_name=?", FormulaPageDataEntity.class);
+			Query<FormulaPageDataEntity> query = session.createQuery("from FormulaPageDataEntity where projectId=? and resourceCode=? and columnName=?", FormulaPageDataEntity.class);
 			query.setParameter(0, projectId);
 			query.setParameter(1, resourceCode);
 			query.setParameter(2,  columnName);
@@ -94,7 +94,7 @@ public class FormulaPageDataDaoImpl implements FormulaPageDataDao {
 		public int deleteFormulaPageData(ProjectEntity project, String resourceCode, String column_name) {
 			
 			Session session = sessionFactory.getCurrentSession();
-			Query query = session.createQuery("delete from FormulaPageData where project_id=? and resource_code=? and column_name=?");
+			Query query = session.createQuery("delete from FormulaPageDataEntity where projectId=? and resourceCode=? and columnName=?");
 			query.setParameter(0, project.getId());
 			query.setParameter(1, resourceCode);
 			query.setParameter(2, column_name);
@@ -103,10 +103,10 @@ public class FormulaPageDataDaoImpl implements FormulaPageDataDao {
 
 		@SuppressWarnings("rawtypes")
 		@Override
-		public int deleteFormulaPageDataByProjectIdResourceId(ProjectEntity project, String resourceCode) {
+		public int deleteFormulaPageDataByProjectResourceId(ProjectEntity project, String resourceCode) {
 			
 			Session session = sessionFactory.getCurrentSession();
-			Query query = session.createQuery("delete from FormulaPageData where project_id=? and resource_code=? and column_name=?");
+			Query query = session.createQuery("delete from FormulaPageDataEntity where projectId=? and resourceCode=? and columnName=?");
 			query.setParameter(0, project.getId());
 			query.setParameter(1, resourceCode);
 			return query.executeUpdate();
@@ -114,11 +114,19 @@ public class FormulaPageDataDaoImpl implements FormulaPageDataDao {
 
 		@SuppressWarnings("rawtypes")
 		@Override
-		public int deleteFormulaPageData() {
+		public int deleteFormulaPageDataByProject(ProjectEntity project) {
 			
 			Session session = sessionFactory.getCurrentSession();
-			Query query = session.createQuery("delete from FormulaPageData");
+			Query query = session.createQuery("delete from FormulaPageDataEntity where projectId=?");
+			query.setParameter(0, project.getId());
 			return query.executeUpdate();
+		}
+
+		@Override
+		public void insertFormulaPageData(FormulaPageDataEntity newFormulaPageData) {
+			
+			Session session = sessionFactory.getCurrentSession();
+			session.saveOrUpdate(newFormulaPageData);
 		}
 
 }

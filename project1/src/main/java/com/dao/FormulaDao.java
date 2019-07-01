@@ -13,6 +13,10 @@ public interface FormulaDao {
 	// insert
 	void insertFormula(ProjectEntity project, String formulaName, String formula);
 	
+	void insertFormula(FormulaEntity newFormula);
+	
+	void updateFormula(FormulaEntity newFormula);
+	
 	// delete
 	int deleteFormula(ProjectEntity project, String formulaName);
 	

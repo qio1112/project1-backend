@@ -8,12 +8,14 @@ import com.entity.ResourceEntity;
 public interface ResourceDao {
 	
 	// select
-	List<ResourceEntity> getResourcesByProjectId(ProjectEntity project);
+	List<ResourceEntity> getResourcesByProject(ProjectEntity project);
 	
-	ResourceEntity getResourceByProjectIdResourceCode(ProjectEntity project, String resourceCode);
+	ResourceEntity getResourceByProjectResourceCode(ProjectEntity project, String resourceCode);
 	
 	// insert
 	void insertResource(ProjectEntity project, String resourceCode, String resourceName);
+	
+	void insertResource(ResourceEntity newResource);
 	
 	// update
 	// not supposed to be edited

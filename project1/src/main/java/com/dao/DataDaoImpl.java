@@ -15,7 +15,7 @@ import com.entity.ProjectEntity;
 public class DataDaoImpl implements DataDao {
 
 	@Autowired 
-	SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 	
 	// selections
 	
@@ -24,7 +24,7 @@ public class DataDaoImpl implements DataDao {
 		
 		int projectId = project.getId();
 		Session session = sessionFactory.getCurrentSession();
-		Query<DataEntity> query = session.createQuery("select * from data where project_id=? order by resource_code", DataEntity.class);
+		Query<DataEntity> query = session.createQuery("from DataEntity where projectId=? order by resourceCode", DataEntity.class);
 		query.setParameter(0, projectId);
 		return query.getResultList();
 	}
@@ -34,7 +34,7 @@ public class DataDaoImpl implements DataDao {
 		
 		int projectId = project.getId();
 		Session session = sessionFactory.getCurrentSession();
-		Query<DataEntity> query = session.createQuery("select * from data where project_id=? and resource_code=? order by column_name", DataEntity.class);
+		Query<DataEntity> query = session.createQuery("from DataEntity where projectId=? and resourceCode=? order by columnName", DataEntity.class);
 		query.setParameter(0, projectId);
 		query.setParameter(1, resourceCode);
 		return query.getResultList();
@@ -45,7 +45,7 @@ public class DataDaoImpl implements DataDao {
 		
 		int projectId = project.getId();
 		Session session = sessionFactory.getCurrentSession();
-		Query<DataEntity> query = session.createQuery("select * from data where project_id=? and resource_code=? and column_name=?", DataEntity.class);
+		Query<DataEntity> query = session.createQuery("from DataEntity where projectId=? and resourceCode=? and columnName=?", DataEntity.class);
 		query.setParameter(0, projectId);
 		query.setParameter(1, resourceCode);
 		query.setParameter(2,  columnName);
@@ -94,7 +94,7 @@ public class DataDaoImpl implements DataDao {
 	public int deleteData(ProjectEntity project, String resourceCode, String column_name) {
 		
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("delete from data where project_id=? and resource_code=? and column_name=?");
+		Query query = session.createQuery("delete from DataEntity where projectId=? and resourceCode=? and columnName=?");
 		query.setParameter(0, project.getId());
 		query.setParameter(1, resourceCode);
 		query.setParameter(2, column_name);
@@ -106,10 +106,27 @@ public class DataDaoImpl implements DataDao {
 	public int deleteDataByProjectIdResourceId(ProjectEntity project, String resourceCode) {
 		
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("delete from data where project_id=? and resource_code=?");
+		Query query = session.createQuery("delete from DataEntity where projectId=? and resourceCode=?");
 		query.setParameter(0, project.getId());
 		query.setParameter(1, resourceCode);
 		return query.executeUpdate();
+	}
+
+	@SuppressWarnings("rawtypes")
+	@Override
+	public int deleteDataByProject(ProjectEntity project) {
+		
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("delete from DataEntity where projectId=?");
+		query.setParameter(0, project.getId());
+		return query.executeUpdate();
+	}
+
+	@Override
+	public void insertData(DataEntity newDataEntity) {
+		
+		Session session = sessionFactory.getCurrentSession();
+		session.saveOrUpdate(newDataEntity);
 	}
 
 }

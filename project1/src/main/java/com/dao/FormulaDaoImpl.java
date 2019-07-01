@@ -23,7 +23,7 @@ public class FormulaDaoImpl implements FormulaDao {
 		
 		int projectId = project.getId();
 		Session session = sessionFactory.getCurrentSession();
-		return session.createQuery("from formula where project_id=?", FormulaEntity.class)
+		return session.createQuery("from FormulaEntity where projectId=?", FormulaEntity.class)
 			.setParameter(0, projectId)
 			.getResultList();
 	}
@@ -40,7 +40,7 @@ public class FormulaDaoImpl implements FormulaDao {
 	public int deleteFormula(ProjectEntity project, String formulaName) {
 		
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("delete from formula where project_id=? and formula_name=?");
+		Query query = session.createQuery("delete from FormulaEntity where projectId=? and formulaName=?");
 		query.setParameter(0, project.getId());
 		query.setParameter(1, formulaName);
 		return query.executeUpdate();
@@ -50,8 +50,22 @@ public class FormulaDaoImpl implements FormulaDao {
 	public int deleteAllFormulas() {
 		
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("delete from formula");
+		Query query = session.createQuery("delete from FormulaEntity");
 		return query.executeUpdate();
+	}
+
+	@Override
+	public void insertFormula(FormulaEntity newFormula) {
+		
+		Session session = sessionFactory.getCurrentSession();
+		session.saveOrUpdate(newFormula);
+	}
+
+	@Override
+	public void updateFormula(FormulaEntity newFormula) {
+		
+		Session session = sessionFactory.getCurrentSession();
+		session.saveOrUpdate(newFormula);
 	}
 
 }
