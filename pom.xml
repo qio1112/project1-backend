@@ -105,8 +105,35 @@
 	    <artifactId>jackson-core</artifactId>
 	    <version>2.9.9</version>
 	</dependency>
-	
-
+	<!-- Servlet+JSP+JSTL  -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+	<dependency>
+	 <!-- Joda-Time -->
+	  <groupId>joda-time</groupId>
+	  <artifactId>joda-time</artifactId>
+	  <version>2.10.2</version>
+	</dependency> 
+	   <!-- To map JodaTime with database type -->      
+        <dependency>
+            <groupId>org.jadira.usertype</groupId>
+            <artifactId>usertype.core</artifactId>
+            <version>3.0.0.CR1</version>
+        </dependency>
+        
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

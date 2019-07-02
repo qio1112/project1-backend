@@ -64,7 +64,8 @@ public class AuthRoutes {
 	@RequestMapping(value="/register", method= RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void registerRoute(@RequestBody User user) { // signup
 
-
+//		String username = user.getUserName();
+//		String password = user.getPassword();
 		(new UserDaoImpl()).createUser(user);;
 		System.out.println("register user");
 	}
@@ -72,7 +73,8 @@ public class AuthRoutes {
 	@RequestMapping(value="/signin",  method= RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void signinRoute(@RequestBody User user) {
 
-
+//		String username = user.getUserName();
+//		(new UserDaoImpl()).getUserByUsername(username);
 
 		(new UserDaoImpl()).getUserByUsername(user.getName());
 
