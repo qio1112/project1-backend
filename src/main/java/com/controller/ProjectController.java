@@ -129,7 +129,7 @@ public class ProjectController {
 			Iterator<ResourceEntity> itr = resourceOfProject.iterator();
 			while(itr.hasNext()) {
 				ResourceEntity curResource = itr.next();
-				dataService.insertDataToData(new DataEntity(project, curResource.getResourceCode(), columnName, null, null));
+				dataService.insertDataToData(new DataEntity(project, curResource.getResourceCode(), columnName, null, "text"));
 			}
 			return new ResponseEntity<>("column added", HttpStatus.OK); 
 		} catch (Exception e) {

@@ -59,7 +59,6 @@ public class UserDaoImpl implements UserDao {
 				.setParameter("username", username)
 				.setParameter("password", decoder.encrypt(password).toString())
 				.getResultList();
-		
 	
 		if(users.size() > 0) {
 			

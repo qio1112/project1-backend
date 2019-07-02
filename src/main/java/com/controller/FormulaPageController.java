@@ -43,13 +43,15 @@ public class FormulaPageController {
 		
 	// create new formula of certain project
 	@PutMapping(value="/formula/create_new_formula_page")
-	public ResponseEntity<String> createNewFormulaData(@RequestBody ProjectEntity project, @RequestBody FormulaPageData formulaPage) {
+	public ResponseEntity<String> createNewFormulaData(@RequestBody FormulaPageData newFormulaPage) {
+		
+		ProjectEntity project = newFormulaPage.getProject();
 		
 		try {
 			// delete old data
 			formulaPageDataService.deleteFormulaPageDataByProject(project);
 			// insert new formula page data
-			formulaPageDataService.insertFormulaPageData(formulaPage);
+			formulaPageDataService.insertFormulaPageData(newFormulaPage);
 			
 			return new ResponseEntity<>("formula data created", HttpStatus.OK);
 		} catch (Exception e) {

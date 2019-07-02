@@ -26,16 +26,20 @@ public class AuthController {
 	
 	// test login
 	@PostMapping(value="/auth/login")
-	public ResponseEntity<String> login(@RequestBody UserEntity user, HttpServletResponse response) {
+	@ResponseStatus(HttpStatus.OK)
+	public UserEntity login(@RequestBody UserEntity user, HttpServletResponse response) {
 			
 		String jwtoken = userService.createUserToken(user.getUsername(), user.getPassword() ) ;
 		System.out.print("jwt : "+ jwtoken);
 		response.addHeader("token", jwtoken);
 		System.out.println("added token to the browser head for user");
-		if(jwtoken != null) 
-			return new ResponseEntity<>("Login success", HttpStatus.OK);
+		if(jwtoken != null) {
+			UserEntity theUser = userService.getUserInfo(user.getName());
+			theUser.setPassword("");
+			return theUser;
+		}
 		else 
-			return new ResponseEntity<>("Wrong username or password", HttpStatus.FORBIDDEN);
+			return null;
 	}
 		
 	// create new user
