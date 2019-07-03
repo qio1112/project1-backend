@@ -30,11 +30,12 @@ public class AuthController {
 	public UserEntity login(@RequestBody UserEntity user, HttpServletResponse response) {
 			
 		String jwtoken = userService.createUserToken(user.getUsername(), user.getPassword() ) ;
-		System.out.print("jwt : "+ jwtoken);
+//		System.out.print("jwt : "+ jwtoken);
 		response.addHeader("token", jwtoken);
 		System.out.println("added token to the browser head for user");
 		if(jwtoken != null) {
-			UserEntity theUser = userService.getUserInfo(user.getName());
+//			System.out.println(user);
+			UserEntity theUser = userService.getUserInfo(user.getUsername());
 			theUser.setPassword("");
 			return theUser;
 		}

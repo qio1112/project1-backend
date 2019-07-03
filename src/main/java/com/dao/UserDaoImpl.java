@@ -35,18 +35,14 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	@SuppressWarnings("unchecked")
 	public UserEntity getUserByUsername(String username) {
-		
-		List<UserEntity> users = new ArrayList<>();
-		
+		List<UserEntity> users = new ArrayList<>();	
 		users = sessionFactory.getCurrentSession()
 				.createQuery("from UserEntity where username=:username")
 				.setParameter("username", username)
 				.getResultList();
+		System.out.println(users);
 		
-		if(users.size() > 0) {
-			return users.get(0);
-		} 
-		return null;
+		return users.get(0);
 	}
 	
 	@SuppressWarnings("unchecked")

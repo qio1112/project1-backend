@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.training.project1</groupId>
-  <artifactId>project1</artifactId>
+  <groupId>com.training.project1-server</groupId>
+  <artifactId>project1-server</artifactId>
   <packaging>war</packaging>
   <version>1.0</version>
-  <name>project1 Maven Webapp</name>
+  <name>project1-server Maven Webapp</name>
   <url>http://maven.apache.org</url>
   
   <properties>
@@ -105,7 +105,7 @@
   </dependencies>
   
   <build>
-    <finalName>project1</finalName>
+    <finalName>project1-server</finalName>
     	<pluginManagement>
 			<plugins>
 				<plugin>
