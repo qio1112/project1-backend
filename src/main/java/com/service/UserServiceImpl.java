@@ -20,9 +20,9 @@ public class UserServiceImpl implements UserService{
 	private UserDao userDao;
 	
 	@Override
-	public void signup(UserEntity newUser) {
+	public String signup(UserEntity newUser) {
 
-		userDao.createUser(newUser);
+		return userDao.createUser(newUser);
 	}
 
 	@Override

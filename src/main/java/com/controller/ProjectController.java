@@ -12,6 +12,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +29,8 @@ import com.entity.ResourceEntity;
 import com.model.ProjectData;
 import com.service.DataService;
 
+
+@CrossOrigin(origins="https://locahost:4200")
 @RestController
 public class ProjectController {
 	
@@ -49,7 +52,7 @@ public class ProjectController {
 //	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<String> insertFromFile(@RequestParam("file") MultipartFile csvFile) throws IOException{
 		String projectName = csvFile.getOriginalFilename().split("\\.")[0] + new Date().getTime();
-		System.out.println(projectName);
+//		System.out.println(projectName);
 		BufferedReader reader = null;
 		ProjectEntity project = dataService.createProject(projectName);
 		
@@ -57,10 +60,8 @@ public class ProjectController {
 			// first two columns will always be called resource_name and resource_code
 			reader = new BufferedReader(new InputStreamReader(csvFile.getInputStream()));
 			String[] columns = reader.readLine().split(",");
-//				columns[0] = "resource_code";
-//				columns[1] = "resource_name";
 			
-			System.out.println(Arrays.deepToString(columns));
+//			System.out.println(Arrays.deepToString(columns));
 			
 			String valueString = reader.readLine();
 			String[] values = null;
@@ -110,10 +111,10 @@ public class ProjectController {
 	}
 	
 	// update one row (maybe one cell)
-	@PatchMapping(value="/project/{projectName}/edit_row")
+	@PatchMapping(value="/project/update_cell")
 	@ResponseStatus(HttpStatus.OK)
-	public void updateProjectDataCell(DataEntity newData) {
-		
+	public void updateProjectDataCell(@RequestBody DataEntity newData) {
+		System.out.println(newData);
 		dataService.updataData(newData);
 	}
 	

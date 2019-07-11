@@ -9,7 +9,7 @@ import com.entity.UserEntity;
  */
 public interface UserService {
 	
-	void signup(UserEntity newUser);
+	String signup(UserEntity newUser);
 	
 	UserEntity getUserInfo(String username);
 	

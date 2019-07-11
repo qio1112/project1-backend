@@ -28,20 +28,18 @@ public class FormulaPageDataDaoImpl implements FormulaPageDataDao {
 		@Override
 		public List<FormulaPageDataEntity> getFormulaPageDataByProject(ProjectEntity project) {
 			
-			int projectId = project.getId();
 			Session session = sessionFactory.getCurrentSession();
-			Query<FormulaPageDataEntity> query = session.createQuery("from FormulaPageDataEntity where projectId=:projectId order by resourceCode", FormulaPageDataEntity.class);
-			query.setParameter("projectId", projectId);
+			Query<FormulaPageDataEntity> query = session.createQuery("from FormulaPageDataEntity where project=:project order by resourceCode", FormulaPageDataEntity.class);
+			query.setParameter("project", project);
 			return query.getResultList();
 		}
 
 		@Override
 		public List<FormulaPageDataEntity> getFormulaPageDataByProjectResourceCode(ProjectEntity project, String resourceCode) {
 			
-			int projectId = project.getId();
 			Session session = sessionFactory.getCurrentSession();
-			Query<FormulaPageDataEntity> query = session.createQuery("from FormulaPageDataEntity where projectId=:projectId and resourceCode=:resourceCode order by columnName", FormulaPageDataEntity.class);
-			query.setParameter("projectId", projectId);
+			Query<FormulaPageDataEntity> query = session.createQuery("from FormulaPageDataEntity where project=:project and resourceCode=:resourceCode order by columnName", FormulaPageDataEntity.class);
+			query.setParameter("project", project);
 			query.setParameter("resourceCode", resourceCode);
 			return query.getResultList();
 		}
@@ -49,10 +47,10 @@ public class FormulaPageDataDaoImpl implements FormulaPageDataDao {
 		@Override
 		public FormulaPageDataEntity getFormulaPageDataByProjectResourceCodeColumnName(ProjectEntity project, String resourceCode, String columnName) {
 			
-			int projectId = project.getId();
+//			int project = project.getId();
 			Session session = sessionFactory.getCurrentSession();
-			Query<FormulaPageDataEntity> query = session.createQuery("from FormulaPageDataEntity where projectId=:projectId and resourceCode=:resourceCode and columnName=:columnName", FormulaPageDataEntity.class);
-			query.setParameter("projectId", projectId);
+			Query<FormulaPageDataEntity> query = session.createQuery("from FormulaPageDataEntity where project=:project and resourceCode=:resourceCode and columnName=:columnName", FormulaPageDataEntity.class);
+			query.setParameter("project", project);
 			query.setParameter("resourceCode", resourceCode);
 			query.setParameter("columnName", columnName);
 			return query.getSingleResult();
@@ -63,17 +61,17 @@ public class FormulaPageDataDaoImpl implements FormulaPageDataDao {
 		@SuppressWarnings({ "unchecked", "rawtypes" })
 		public List<FormulaPageDataEntity> getFormulaPageDataByProjectAndRange(ProjectEntity project, int start, int end) {
 			
-			int projectId = project.getId();
+//			int project = project.getId();
 			Session session = sessionFactory.getCurrentSession();
 			String queryString = 
 						"select project_id, resource_code, column_name, value, type, from_resource from(\n" + 
 						"select * from \n" + 
 						"	(select *, row_number() over (partition by column_name order by resource_code, column_name) as row_num \n" + 
 						"    from data) as a  \n" + 
-						"where project_id=:projectId\n" + 
+						"where project_id=:project\n" + 
 						"having row_num between :start and :end) as b";
 			Query query = session.createSQLQuery(queryString);
-			query.setParameter("projectId", projectId);
+			query.setParameter("project", project);
 			query.setParameter("start", start);
 			query.setParameter("end", end);
 			List<FormulaPageDataEntity> result = new ArrayList<>();
@@ -108,8 +106,8 @@ public class FormulaPageDataDaoImpl implements FormulaPageDataDao {
 		public int deleteFormulaPageData(ProjectEntity project, String resourceCode, String column_name) {
 			
 			Session session = sessionFactory.getCurrentSession();
-			Query query = session.createQuery("delete from FormulaPageDataEntity where projectId=:projectId and resourceCode=:resourceCode and columnName=:columnName");
-			query.setParameter("projectId", project.getId());
+			Query query = session.createQuery("delete from FormulaPageDataEntity where project=:project and resourceCode=:resourceCode and columnName=:columnName");
+			query.setParameter("project", project.getId());
 			query.setParameter("resourceCode", resourceCode);
 			query.setParameter("columnName", column_name);
 			return query.executeUpdate();
@@ -120,8 +118,8 @@ public class FormulaPageDataDaoImpl implements FormulaPageDataDao {
 		public int deleteFormulaPageDataByProjectResourceCode(ProjectEntity project, String resourceCode) {
 			
 			Session session = sessionFactory.getCurrentSession();
-			Query query = session.createQuery("delete from FormulaPageDataEntity where projectId=:projectId and resourceCode=:resourceCode");
-			query.setParameter("projectId", project.getId());
+			Query query = session.createQuery("delete from FormulaPageDataEntity where project=:project and resourceCode=:resourceCode");
+			query.setParameter("project", project.getId());
 			query.setParameter("resourceCode", resourceCode);
 			return query.executeUpdate();
 		}
@@ -131,8 +129,8 @@ public class FormulaPageDataDaoImpl implements FormulaPageDataDao {
 		public int deleteFormulaPageDataByProject(ProjectEntity project) {
 			
 			Session session = sessionFactory.getCurrentSession();
-			Query query = session.createQuery("delete from FormulaPageDataEntity where projectId=:projectId");
-			query.setParameter("projectId", project.getId());
+			Query query = session.createQuery("delete from FormulaPageDataEntity where project=:project");
+			query.setParameter("project", project.getId());
 			return query.executeUpdate();
 		}
 
@@ -148,8 +146,8 @@ public class FormulaPageDataDaoImpl implements FormulaPageDataDao {
 		public int deleteFormulaPageDataByProjectColumnName(ProjectEntity project, String columnName) {
 			
 			Session session = sessionFactory.getCurrentSession();
-			Query query = session.createQuery("delete from FormulaPageDataEntity where projectId=:projectId and column_name=:columnName");
-			query.setParameter("projectId", project.getId());
+			Query query = session.createQuery("delete from FormulaPageDataEntity where project=:project and column_name=:columnName");
+			query.setParameter("project", project.getId());
 			query.setParameter("columnName", columnName);
 			return query.executeUpdate();
 		}

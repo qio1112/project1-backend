@@ -55,20 +55,33 @@ public class UserDaoImpl implements UserDao {
 				.setParameter("username", username)
 				.setParameter("password", decoder.encrypt(password).toString())
 				.getResultList();
-	
+		System.out.println(users);
 		if(users.size() > 0) {
+			//UserNames the id
+			//issue is the name
+			//subject is the memberdate in string format
 			
-			return jwt.createJWT("Looking up at the clouds", users.get(0).getUsername(), users.get(0).getMemberDate().toString(), -1);
+			// token expirse in 1 hour
+			System.out.println(users);
+			return jwt.createJWT( users.get(0).getName() ,users.get(0).getUsername() , users.get(0).getMemberDate().toString(), 1000*60*60*24);
 		} 
 		return null;
 	}
 
 	@Override
-	public void createUser(UserEntity newUser) {
-		newUser.setPassword(decoder.encrypt(newUser.getPassword()));
-		System.out.println(newUser.toString());
-		sessionFactory.getCurrentSession()
-			.saveOrUpdate(newUser);
+	public String createUser(UserEntity newUser) {
+		String error="";
+		try {
+			newUser.setPassword(decoder.encrypt(newUser.getPassword()));
+//			System.out.println(newUser.toString());
+			sessionFactory.getCurrentSession()
+				.saveOrUpdate(newUser);
+			return "successfully register user";
+		}catch(Exception ex) {
+			error = ex.getMessage();
+		}
+		return error;
+		
 	}
 
 //	@Override

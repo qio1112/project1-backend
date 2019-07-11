@@ -3,6 +3,7 @@ package com.filter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -70,7 +71,6 @@ public class isUserLogin implements Filter {
 			// then we get the mapping of it take the user naem from claim
 			Map<String, Object> expectedMap = new HashMap<>(claims);
 			// then check the user name of the token from the claim
-			System.out.println(expectedMap.get("iss"));
 			return true;	
 		} catch(Exception e) {
 			return false;
@@ -86,3 +86,12 @@ public class isUserLogin implements Filter {
 	}
 
 }
+
+
+
+//System.out.println( "iss " + expectedMap.get("iss"));
+//System.out.println( "id " + expectedMap.get("id"));
+//   for(Entry<String, Object> entry : claims.entrySet()) {
+//	   System.out.println(entry.getKey() + " : " + entry.getValue() );
+////        expectedMap.put(entry.getKey() , entry.getValue());
+//    }

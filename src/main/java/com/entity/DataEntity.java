@@ -93,4 +93,11 @@ public class DataEntity implements Serializable {
 	}
 
 	
+	public String toString() {
+		
+		
+		return String.format("%s %s %s %s ", type,value, columnName, resourceCode);
+		
+	}
+	
 }

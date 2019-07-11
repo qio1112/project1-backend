@@ -10,7 +10,7 @@ public interface UserDao {
 	
 	UserEntity getUserByUsername(String username);
 	
-	void createUser(UserEntity newUser);
+	String createUser(UserEntity newUser);
 	
 	public String createUserToken(String username, String password);
 	
