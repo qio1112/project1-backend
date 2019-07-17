@@ -18,6 +18,27 @@ public class FormulaPageData {
 	
 	private FormulaEntity[] formulas;
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public FormulaPageData() { }
 
 	public FormulaPageData(ProjectEntity project, FormulaPageDataEntity[] formulaPageData, FormulaEntity[] formulas) {
@@ -26,6 +47,29 @@ public class FormulaPageData {
 		this.formulas = formulas;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public ProjectEntity getProject() {
 		return project;
 	}

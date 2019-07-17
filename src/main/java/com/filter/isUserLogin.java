@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.helper.JWT;
 
@@ -26,6 +27,7 @@ import io.jsonwebtoken.security.SignatureException;
  * @author Nicholaus
  * Servlet Filter implementation class isUserLogin
  */
+@CrossOrigin(origins="*")
 @WebFilter({"/project/*","/formula/*"})
 @Component
 public class isUserLogin implements Filter {
@@ -51,14 +53,21 @@ public class isUserLogin implements Filter {
 //		System.out.println("In filter");
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
-		 String token = req.getHeader("token");
-		 
-		 // if token doesnt exist and if its not valid 
-		 if(token == null || !getToken(token)) {			
-			 res.sendRedirect("http://localhost:8080/project1");
-			 return;
-		 }
-//		 System.out.println(req.getHeader("token"));
+//		 String token = req.getHeader("token");
+//		 
+		String token = req.getHeader("Authorization");
+		System.out.println("Get token ");
+		System.out.println(token);
+		System.out.println("res :");
+		System.out.println(res);
+//		System.out.println(token);
+//////		 // if token doesnt exist and if its not valid 
+//		 if(token == null || !getToken(token)) {			
+////			 res.sendRedirect("http://localhost:8080/project1");
+//			 res.sendError(403);
+//			 return;
+//		 }
+		 System.out.println("you are in your application good job");
 		 // pass the request along the filter chain
 		 chain.doFilter(request, response);
 	}

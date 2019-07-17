@@ -136,8 +136,7 @@ public class DataDaoImpl implements DataDao {
 	}
 
 	@Override
-	public void insertData(DataEntity newDataEntity) {
-		
+	public void insertData(DataEntity newDataEntity) {		
 		Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(newDataEntity);
 	}

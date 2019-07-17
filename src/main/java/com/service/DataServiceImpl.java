@@ -73,12 +73,11 @@ public class DataServiceImpl implements DataService{
 	@Override
 	public void insertDataToProject(ProjectData projectData) {
 		
-//		ProjectEntity project = projectData.getProject();
-		
 		DataEntity[] data = projectData.getData();
-		
 		ResourceEntity[] resource = projectData.getResource();
+
 		
+		//INSERT DATA AND RESOURCES ONE BY ONE
 		for(DataEntity dataEntity : data) {
 			dataDao.insertData(dataEntity);
 		}

@@ -21,7 +21,7 @@ import com.service.FormulaPageDataService;
  * @author yipeng, Nicholaus
  *
  */
-@CrossOrigin(origins="https://locahost:4200")
+@CrossOrigin(origins="*")
 @RestController
 public class FormulaPageController {
 	

@@ -30,7 +30,7 @@ import com.model.ProjectData;
 import com.service.DataService;
 
 
-@CrossOrigin(origins="https://locahost:4200")
+@CrossOrigin(origins="*")
 @RestController
 public class ProjectController {
 	
@@ -46,11 +46,11 @@ public class ProjectController {
 	}
 	
 	// project data 
+//	@RequestPart("file") MultipartFile file
 	
 	// insert csv file
 	@PostMapping(value="/project/save_file")
-//	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<String> insertFromFile(@RequestParam("file") MultipartFile csvFile) throws IOException{
+	public ResponseEntity<ProjectData> insertFromFile(@RequestParam("file") MultipartFile csvFile) throws IOException{
 		String projectName = csvFile.getOriginalFilename().split("\\.")[0] + new Date().getTime();
 //		System.out.println(projectName);
 		BufferedReader reader = null;
@@ -85,21 +85,34 @@ public class ProjectController {
 					values = valueString.split(",");
 				
 			}
+			
+			
+			
+			// Store data into newProjectData
 			newProjectData.setProject(project);
 			newProjectData.setData(dataEntities.toArray(new DataEntity[dataEntities.size()]));
 			newProjectData.setResource(resourceEntities.toArray(new ResourceEntity[resourceEntities.size()]));
 			
+			//CALLING SERVICE to INSERT INTO THE DATABASE 
 			dataService.insertDataToProject(newProjectData);
-			return new ResponseEntity<>("file uploaded", HttpStatus.CREATED);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<>(e.toString(), HttpStatus.NOT_ACCEPTABLE);
-		} finally {
 			if(reader != null)
 				reader.close();
+			//IF IT WAS successfully added then return the Project data
+			return new ResponseEntity<>(newProjectData, HttpStatus.CREATED);
+			
+		} catch (Exception e) {
+			// return error message to the terminal
+			System.out.println(e.toString());
+			if(reader != null)
+				reader.close();
+			return new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
 		}
-		
+		// You know that this methods makes no sence because in the try catch you return the value
+//		finally {
+//			if(reader != null)
+//				reader.close();
+//		}
+//		
 	}
 	
 	// get data by project name, page number, and number of rows on each row

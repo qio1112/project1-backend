@@ -1,5 +1,7 @@
 package com.model;
 
+import java.util.Arrays;
+
 import com.entity.DataEntity;
 import com.entity.ProjectEntity;
 import com.entity.ResourceEntity;
@@ -18,6 +20,12 @@ public class ProjectData {
 	
 	private ResourceEntity[] resource;
 	
+	@Override
+	public String toString() {
+		return "ProjectData [project=" + project + ", data=" + Arrays.toString(data) + ", resource="
+				+ Arrays.toString(resource) + "]";
+	}
+
 	public ProjectData() { }
 
 	public ProjectData(ProjectEntity project, DataEntity[] data, ResourceEntity[] resource) {
@@ -26,6 +34,17 @@ public class ProjectData {
 		this.resource = resource;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public ProjectEntity getProject() {
 		return project;
 	}

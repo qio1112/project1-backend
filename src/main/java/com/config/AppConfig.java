@@ -19,7 +19,9 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
@@ -34,13 +36,25 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @EnableTransactionManagement
 @PropertySource("classpath:/mysql.properties")
 //@Import({SpringSecurityConfig.class})
-public class AppConfig {
+public class AppConfig implements WebMvcConfigurer{
 	
 	@Autowired
 	private Environment env; 
 	
 	private Logger logger = Logger.getLogger(this.getClass().getName());
 	
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+
+        registry.addMapping("/*")
+            .allowedOrigins("http://localhost:4200")
+            .allowedMethods("PUT", "DELETE","POST","GET")
+            .allowedHeaders("header1", "header2", "header3")
+            .exposedHeaders("header1", "header2")
+            .allowCredentials(true).maxAge(3600);
+
+        // Add more mappings...
+    }
 	@Bean(name="dataSource")
 	public DataSource myDataSource() {
 		
@@ -122,10 +136,6 @@ public class AppConfig {
 		return intPropVal;
 	}	
 	
-	@Bean
-    public MultipartResolver multipartResolver() {
-        return new StandardServletMultipartResolver();
-    }
-	
+
 	
 }

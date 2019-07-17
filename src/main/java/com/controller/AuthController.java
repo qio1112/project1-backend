@@ -27,7 +27,7 @@ import io.jsonwebtoken.Claims;
  *
  */
 
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin(origins="*")
 @RestController
 public class AuthController {
 
