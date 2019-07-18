@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.entity.DataEntity;
 import com.entity.ProjectEntity;
+import com.exception.DataNotFoundException;
 
 /**
  * Project (resource) DAO
@@ -58,7 +59,7 @@ public class DataDaoImpl implements DataDao {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public List<DataEntity> getDataByProjectAndRange(ProjectEntity project, int start, int end) {
+	public List<DataEntity> getDataByProjectAndRange(ProjectEntity project, int start, int end) throws DataNotFoundException{
 		
 		int projectId = project.getId();
 		Session session = sessionFactory.getCurrentSession();
@@ -76,6 +77,11 @@ public class DataDaoImpl implements DataDao {
 		query.setParameter("end", end);
 		List<DataEntity> result = new ArrayList<>();
 		List<Object[]> rawResult = query.getResultList();
+		
+		if (rawResult.size() == 0) {
+			throw new DataNotFoundException("No data found");
+		}
+		
 		for (Object[] resultItem : rawResult) {
 			DataEntity curDataEntity = new DataEntity(project, (String)resultItem[1], (String)resultItem[2], (String)resultItem[3], (String)resultItem[4]);
 			result.add(curDataEntity);
@@ -97,6 +103,7 @@ public class DataDaoImpl implements DataDao {
 	// update
 	@Override
 	public void updateData(DataEntity updatedData) {
+		System.out.println(updatedData);
 		Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(updatedData);
 	}

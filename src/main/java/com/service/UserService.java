@@ -1,6 +1,8 @@
 package com.service;
 
 import com.entity.UserEntity;
+import com.exception.DataAlreadyExistsException;
+import com.exception.DataNotFoundException;
 
 /**
  * service for user information
@@ -9,9 +11,9 @@ import com.entity.UserEntity;
  */
 public interface UserService {
 	
-	void signup(UserEntity newUser);
+	void signup(UserEntity newUser) throws DataAlreadyExistsException;
 	
-	UserEntity getUserInfo(String username);
+	UserEntity getUserInfo(String username) throws DataNotFoundException;
 	
 	String createUserToken(String username, String password);
 }

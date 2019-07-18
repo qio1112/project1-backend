@@ -1,6 +1,8 @@
 package com.filter;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,27 +52,23 @@ public class isUserLogin implements Filter {
 //		System.out.println("In filter");
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
-		 String token = req.getHeader("token");
-		 
-		 // if token doesnt exist and if its not valid 
-		 if(token == null || !getToken(token)) {			
-			 res.sendRedirect("http://localhost:8080/project1");
-			 return;
-		 }
-//		 System.out.println(req.getHeader("token"));
-		 // pass the request along the filter chain
-		 chain.doFilter(request, response);
+		
+		System.out.println("HEADER:" + req.getHeader("authorization"));
+		// do filter
+//		res.sendError(403, "Failed to auth");
+		
+		chain.doFilter(request, response);
 	}
 	
 	public boolean getToken(String token) {
 		// TODO Auto-generated method stub
 		try {
-			// if claim doesnt throw an error
+			// if claim doesn't throw an error
 			Claims claims = JWT.decodeJWT(token);
-			// then we get the mapping of it take the user naem from claim
+			// then we get the mapping of it take the user name from claim
 			Map<String, Object> expectedMap = new HashMap<>(claims);
 			// then check the user name of the token from the claim
-			System.out.println(expectedMap.get("iss"));
+			System.out.println(expectedMap.keySet());
 			return true;	
 		} catch(Exception e) {
 			return false;

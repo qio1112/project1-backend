@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.entity.DataEntity;
 import com.entity.ProjectEntity;
+import com.exception.DataNotFoundException;
 
 /**
  * Project (Resource) data DAO
@@ -19,7 +20,7 @@ public interface DataDao {
 	List<DataEntity> getDataByProjectResourceCode(ProjectEntity project, String resourceCode);
 	
 	//used
-	List<DataEntity> getDataByProjectAndRange(ProjectEntity project, int start, int end);
+	List<DataEntity> getDataByProjectAndRange(ProjectEntity project, int start, int end) throws DataNotFoundException;
 	
 	DataEntity getDataByProjectResourceCodeColumnName(ProjectEntity project, String resourceCode, String columnName);
 	

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.entity.ProjectEntity;
 import com.entity.ResourceEntity;
+import com.exception.DataNotFoundException;
 
 /**
  * DAO of resource information of projects
@@ -23,32 +24,44 @@ public class ResourceDaoImpl implements ResourceDao {
 	SessionFactory sessionFactory;
 
 	@Override
-	public List<ResourceEntity> getResourcesByProject(ProjectEntity project) {
+	public List<ResourceEntity> getResourcesByProject(ProjectEntity project) throws DataNotFoundException {
 		
 		Session session = sessionFactory.getCurrentSession();
 		Query<ResourceEntity> query = session.createQuery("from ResourceEntity where project=:project order by resourceCode", ResourceEntity.class);
 		query.setParameter("project", project);
-		return query.getResultList();
+		List<ResourceEntity> result = query.getResultList();
+		if(result == null || result.size() == 0) {
+			throw new DataNotFoundException("No resource data found");
+		}
+		return result;
 	}
 	
 	@Override
-	public ResourceEntity getResourcesByProjectResourceCode(ProjectEntity project, String resourceCode) {
+	public ResourceEntity getResourcesByProjectResourceCode(ProjectEntity project, String resourceCode) throws DataNotFoundException {
 		
 		Session session = sessionFactory.getCurrentSession();
 		Query<ResourceEntity> query = session.createQuery("from ResourceEntity where project=:project and resourceCode=:resourceCode order by resourceCode", ResourceEntity.class);
 		query.setParameter("project", project);
 		query.setParameter("resourceCode", resourceCode);
-		return query.getSingleResult();
+		ResourceEntity result = query.getSingleResult();
+		if(result == null) {
+			throw new DataNotFoundException("No resource data found");
+		} 
+		return result;
 	}
 
 	@Override
-	public ResourceEntity getResourceByProjectResourceCode(ProjectEntity project, String resourceCode) {
+	public ResourceEntity getResourceByProjectResourceCode(ProjectEntity project, String resourceCode) throws DataNotFoundException {
 		
 		Session session = sessionFactory.getCurrentSession();
 		Query<ResourceEntity> query = session.createQuery("from ResourceEntity where project=:project and resourceCode=:resourceCode", ResourceEntity.class);
 		query.setParameter("project", project);
 		query.setParameter("resourceCode", resourceCode);
-		return query.getSingleResult();
+		ResourceEntity result = query.getSingleResult();
+		if(result == null) {
+			throw new DataNotFoundException("No resource data found");
+		} 
+		return result;
 	}
 
 	@Override

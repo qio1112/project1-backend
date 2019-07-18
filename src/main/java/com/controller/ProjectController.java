@@ -6,12 +6,15 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,14 +24,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.entity.DataEntity;
 import com.entity.ProjectEntity;
 import com.entity.ResourceEntity;
+import com.exception.DataNotFoundException;
 import com.model.ProjectData;
 import com.service.DataService;
 
 @RestController
+@CrossOrigin(origins="*")
 public class ProjectController {
 	
 	@Autowired 
@@ -36,10 +42,17 @@ public class ProjectController {
 	
 	// get all projects
 	@GetMapping(value="/project/projects")
-	@ResponseStatus(HttpStatus.OK)
-	public List<ProjectEntity> getProjects() {
+	public Map<String, Object> getProjects() {
 		
-		return dataService.getProjects();
+		try {
+			List<ProjectEntity> projects = dataService.getProjects();
+			Map<String, Object> resMap = new HashMap<>();
+			resMap.put("message", "projects fetched");
+			resMap.put("data", projects);
+			return resMap;
+		} catch (DataNotFoundException e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.message());
+		}
 	}
 	
 	// project data 
@@ -47,7 +60,7 @@ public class ProjectController {
 	// insert csv file
 	@PostMapping(value="/project/save_file")
 //	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<String> insertFromFile(@RequestParam("file") MultipartFile csvFile) throws IOException{
+	public Map<String, Object> insertFromFile(@RequestParam("file") MultipartFile csvFile) throws IOException{
 		String projectName = csvFile.getOriginalFilename().split("\\.")[0] + new Date().getTime();
 		System.out.println(projectName);
 		BufferedReader reader = null;
@@ -89,11 +102,12 @@ public class ProjectController {
 			newProjectData.setResource(resourceEntities.toArray(new ResourceEntity[resourceEntities.size()]));
 			
 			dataService.insertDataToProject(newProjectData);
-			return new ResponseEntity<>("file uploaded", HttpStatus.CREATED);
-			
+			Map<String, Object> res = new HashMap<>();
+			res.put("message", "file uploaded");
+			res.put("data", dataService.getProjectByName(projectName));
+			return res;
 		} catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<>(e.toString(), HttpStatus.NOT_ACCEPTABLE);
+			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to upload file");
 		} finally {
 			if(reader != null)
 				reader.close();
@@ -106,14 +120,19 @@ public class ProjectController {
 	@ResponseStatus(HttpStatus.OK)
 	public ProjectData getProjectDataByProjectNameAngPage(@PathVariable String projectName, @RequestParam(name="page") int page, @RequestParam(name="page_rows") int numPerPage) {
 		
-		return dataService.getProjectDataByNameAngPage(projectName, page, numPerPage);
+		try {
+			return dataService.getProjectDataByNameAngPage(projectName, page, numPerPage);
+		} catch (DataNotFoundException e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.message());
+		}
 	}
 	
 	// update one row (maybe one cell)
-	@PatchMapping(value="/project/{projectName}/edit_row")
+	@PatchMapping(value="/project/update_cell")
 	@ResponseStatus(HttpStatus.OK)
-	public void updateProjectDataCell(DataEntity newData) {
+	public void updateProjectDataCell(@RequestBody DataEntity newData) {
 		
+//		System.out.println(newData);
 		dataService.updataData(newData);
 	}
 	

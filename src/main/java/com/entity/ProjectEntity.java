@@ -25,9 +25,7 @@ public class ProjectEntity {
 	@Column(name="project_name")
 	private String projectName;
 	
-	public ProjectEntity() {
-		System.out.println("Entity project created.");
-	}
+	public ProjectEntity() { }
 	
 	public ProjectEntity(String name) {
 		this.projectName = name;

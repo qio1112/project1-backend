@@ -13,6 +13,7 @@ import com.dao.ResourceDao;
 import com.entity.DataEntity;
 import com.entity.ProjectEntity;
 import com.entity.ResourceEntity;
+import com.exception.DataNotFoundException;
 import com.model.ProjectData;
 
 /**
@@ -21,7 +22,6 @@ import com.model.ProjectData;
  *
  */
 @Service
-@Transactional
 public class DataServiceImpl implements DataService{
 	
 	@Autowired
@@ -34,25 +34,30 @@ public class DataServiceImpl implements DataService{
 	private ResourceDao resourceDao;
 	
 	@Override
-	public List<ProjectEntity> getProjects() {
+	@Transactional
+	public List<ProjectEntity> getProjects() throws DataNotFoundException {
 		return projectDao.getProjects();
 	}
 	
 	@Override
-	public ProjectEntity getProjectByName(String name) {
+	@Transactional
+	public ProjectEntity getProjectByName(String name) throws DataNotFoundException {
 		
 		return projectDao.getProjectByName(name);
 	}
 
 	@Override
-	public ProjectData getProjectDataByNameAngPage(String projectName, int page, int numPerPage) {
+	@Transactional
+	public ProjectData getProjectDataByNameAngPage(String projectName, int page, int numPerPage) throws DataNotFoundException {
+		
+		if(page <= 0 || numPerPage <= 0) {
+			throw new DataNotFoundException();
+		}
 		
 		ProjectEntity project = projectDao.getProjectByName(projectName);
 		
-		List<DataEntity> data = dataDao.getDataByProjectAndRange(project, page * numPerPage, page * numPerPage + numPerPage - 1);
-		
-		System.out.println(data.get(0));
-		
+		List<DataEntity> data = dataDao.getDataByProjectAndRange(project, (page - 1) * numPerPage + 1, page * numPerPage);
+				
 		List<ResourceEntity> resource = new ArrayList<>();
 		
 		for(DataEntity dataEntity : data) {
@@ -64,13 +69,19 @@ public class DataServiceImpl implements DataService{
 	}
 	
 	@Override
+	@Transactional
 	public ProjectEntity createProject(String projectName) {
 		
 		projectDao.insertProject(projectName);
-		return projectDao.getProjectByName(projectName);
+		try {
+			return projectDao.getProjectByName(projectName);
+		} catch (DataNotFoundException e) {
+			return null;
+		}
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public void insertDataToProject(ProjectData projectData) {
 		
 //		ProjectEntity project = projectData.getProject();
@@ -89,24 +100,28 @@ public class DataServiceImpl implements DataService{
 	}
 
 	@Override
+	@Transactional
 	public void updataData(DataEntity newDataEntity) {
 		
 		dataDao.updateData(newDataEntity);
 	}
 
 	@Override
-	public List<ResourceEntity> getResourceByProject(ProjectEntity project) {
+	@Transactional
+	public List<ResourceEntity> getResourceByProject(ProjectEntity project) throws DataNotFoundException {
 		
 		return resourceDao.getResourcesByProject(project);
 	}
 
 	@Override
+	@Transactional
 	public void insertDataToData(DataEntity data) {
 
 		dataDao.insertData(data);
 	}
 
 	@Override
+	@Transactional
 	public int deleteColumnOfProject(ProjectEntity project, String columnName) {
 		
 		return dataDao.deleteDataByProjectColumnName(project, columnName);

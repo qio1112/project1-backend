@@ -18,6 +18,7 @@ import javax.persistence.Table;
 @Table(name="data")
 public class DataEntity implements Serializable {
 	
+	
 	/**
 	 * 
 	 */
@@ -41,6 +42,8 @@ public class DataEntity implements Serializable {
 	
 	@Column(name="type")
 	private String type;
+	
+	// list of DataEntity
 	
 	public DataEntity() { }
 
@@ -92,5 +95,10 @@ public class DataEntity implements Serializable {
 		this.type = type;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "DataEntity [project=" + project + ", resourceCode=" + resourceCode + ", columnName=" + columnName
+				+ ", value=" + value + ", type=" + type + "]";
+	}
+
 }

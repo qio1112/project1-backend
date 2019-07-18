@@ -3,6 +3,7 @@ package com.dao;
 import java.util.List;
 
 import com.entity.ProjectEntity;
+import com.exception.DataNotFoundException;
 
 /**
  * DAO of project information
@@ -12,11 +13,11 @@ import com.entity.ProjectEntity;
 public interface ProjectDao {
 	
 	//select
-	List<ProjectEntity> getProjects();
+	List<ProjectEntity> getProjects() throws DataNotFoundException;
 	
-	ProjectEntity getProjectById(int id);
+	ProjectEntity getProjectById(int id) throws DataNotFoundException;
 	
-	ProjectEntity getProjectByName(String name);
+	ProjectEntity getProjectByName(String name) throws DataNotFoundException;
 	
 	//insert
 	void insertProject(String name);

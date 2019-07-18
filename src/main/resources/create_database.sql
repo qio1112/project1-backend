@@ -33,7 +33,8 @@ create table `data` (
     `value` varchar(50),
     `type` varchar(50) not null,
     primary key (`project_id`, `resource_code`, `column_name`),
-    foreign key (`project_id`) references `project`(`id`)
+    foreign key (`project_id`) references `project`(`id`),
+    foreign key (`resource_code`) references `resource`(`resource_code`)
 ) engine=innodb;
 
 create table `resource` (
@@ -51,7 +52,8 @@ create table `formula_page_data` (
     `type` varchar(50) not null,
     `from_resource` tinyint(1) not null,
     primary key (`project_id`, `resource_code`, `column_name`),
-    foreign key (`project_id`) references `project`(`id`)
+    foreign key (`project_id`) references `project`(`id`),
+    foreign key (`resource_code`) references `resource`(`resource_code`)
 ) engine=innodb;
 
 create table `formula` (

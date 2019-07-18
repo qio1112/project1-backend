@@ -5,6 +5,7 @@ import java.util.List;
 import com.entity.DataEntity;
 import com.entity.ProjectEntity;
 import com.entity.ResourceEntity;
+import com.exception.DataNotFoundException;
 import com.model.ProjectData;
 
 /**
@@ -14,15 +15,15 @@ import com.model.ProjectData;
  */
 public interface DataService {
 	
-	List<ProjectEntity> getProjects();
+	List<ProjectEntity> getProjects() throws DataNotFoundException;
 	
 	ProjectEntity createProject(String projectName);
 	
-	ProjectEntity getProjectByName(String projectName);
+	ProjectEntity getProjectByName(String projectName) throws DataNotFoundException;
 	
-	List<ResourceEntity> getResourceByProject(ProjectEntity project);
+	List<ResourceEntity> getResourceByProject(ProjectEntity project) throws DataNotFoundException;
 
-	ProjectData getProjectDataByNameAngPage(String projectName, int page, int numPerPage);
+	ProjectData getProjectDataByNameAngPage(String projectName, int page, int numPerPage) throws DataNotFoundException;
 	
 	void insertDataToProject(ProjectData projectData);
 	
