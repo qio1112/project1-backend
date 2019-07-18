@@ -123,6 +123,7 @@ public class ProjectController {
 		try {
 			return dataService.getProjectDataByNameAngPage(projectName, page, numPerPage);
 		} catch (DataNotFoundException e) {
+			
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.message());
 		}
 	}
