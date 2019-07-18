@@ -54,19 +54,20 @@ public class isUserLogin implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 //		 String token = req.getHeader("token");
-//		 
-		String token = req.getHeader("Authorization");
-		System.out.println("Get token ");
-		System.out.println(token);
-		System.out.println("res :");
-		System.out.println(res);
-//		System.out.println(token);
-//////		 // if token doesnt exist and if its not valid 
-//		 if(token == null || !getToken(token)) {			
-////			 res.sendRedirect("http://localhost:8080/project1");
-//			 res.sendError(403);
-//			 return;
-//		 }
+		 if (!"OPTIONS".equals(req.getMethod())) {
+				String token = req.getHeader("Authorization");
+				System.out.println("Get token ");
+				System.out.println(token);
+//				System.out.println("res :");
+//				System.out.println(req.getMethod());
+//				System.out.println(token);
+//////				 // if token doesnt exist and if its not valid 
+				 if(token == null || !getToken(token)) {			
+//					 res.sendRedirect("http://localhost:8080/project1");
+					 res.sendError(403);
+					 return ;
+				 }
+		 }
 		 System.out.println("you are in your application good job");
 		 // pass the request along the filter chain
 		 chain.doFilter(request, response);
